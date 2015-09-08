@@ -1,3 +1,12 @@
+<html>
+<head>
+<title>TP Millet-Diale</title>
+<h1 align="center">EMR MILLET-DIALE (DAGOSTINO)</h1>
+<br>
+</head>
+
+<body>
+
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -17,9 +26,9 @@ class tarjeta{
 	function asignar($saldo,$tipo){
 		$this->saldo = $saldo;
 		//$tusviajes = new viajes;
-		$this->viajes->hora=[];
+	/*	$this->viajes->hora=[];
 		$this->viajes->colectivo=[];
-		$this->viajes->monto=[];
+		$this->viajes->monto=[];*/
 		$this->tipo=$tipo;
 	}
 
@@ -135,9 +144,9 @@ class tarjeta{
 
 class viajes{
 
-	var $hora=[];
-	var $colectivo=[];
-	var $monto=[];
+	var $hora;
+	var $colectivo;
+	var $monto;
 
 }
 
@@ -153,22 +162,68 @@ class colectivo{
 		$this->numero = $numero;
 	}
 }
+?>
+
+		<form method="post">
+		<div align="center">
+			<div>
+			<h1>Crear Tarjeta</h1>
+			</div>
+			<div>
+			<h2>Saldo</h2>
+			<input type="number" name="saldo"required>
+			</div>
+			<div>
+			<h2>Tipo de tarjeta</h2>
+			<select name="formTarjeta">
+  				<option value="">Selecciona...</option>
+  				<option value="1">Tarjeta Normal</option>
+  				<option value="2">Tarjeta Medio boleto</option>
+			</select>
+			</div>
+			<br>
+			<div align="center">
+			<input type="submit" name="enviar" value="Crear Tarjeta">
+			</div>
+		</div>
+	</form>
+	<br>
+	<br>
+	<form method="post">
+		<div align="center">
+			<div>
+			<h1>Cargar Tarjeta</h1>
+			</div>
+			<div>
+			<h2>Monto a cargar</h2>
+			<input type="number" name="monto"required>
+			</div>
+			<br>
+			<div align="center">
+			<input type="submit" name="enviar2" value="Cargar Tarjeta">
+			</div>
+		</div>
+	</form>
 
 
-$tarjeta = new tarjeta;
-$tarjeta->asignar(0,1);
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php
+if(isset($_POST['enviar'])){
+	if(empty($_POST['formTarjeta'])){
+		?>
+		<h2 align="center">No seleccionaste el tipo de tarjeta!</h2>
+		<?php
+	}
+	else{
+		$tarjeta = new tarjeta;
+		$tarjeta->saldo = $_POST['saldo'];
+		$tarjeta->tipo = $_POST['formTarjeta'];
+	}
+}
+if(isset($_POST['enviar2'])){
+	$tarjeta->recarga($_POST['monto']);
+}	
 
 ?>
+
+</body>
+</html>
