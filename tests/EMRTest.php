@@ -15,7 +15,7 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 
 	public function setUp(){
 		//$this->$tarjeta1 = new tarjeta(0,1);						// $0, tarjeta comun
-		$this->$tarjeta2 = new tarjeta(150,0);						// $150, tarjeta medio boleto
+		$tarjeta2 = new tarjeta(150,0);						// $150, tarjeta medio boleto
 		$this->$tarjeta4 = new tarjeta(0,0);						// $0, tarjeta medio boleto
 		$this->$tarjeta3 = new tarjeta(100,1);						// $100, tarjeta comun
 		$this->$colectivo144 = new colectivo("rosariobus",144,54321);			//colectivo 144
