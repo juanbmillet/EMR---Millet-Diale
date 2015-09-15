@@ -13,15 +13,15 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 	protected $horario;
 	protected $horariotransbordo;
 
-	public function setUp(){
-		//$this->$tarjeta1 = new tarjeta(0,1);						// $0, tarjeta comun
+	protected function setUp(){
+		$tarjeta1 = new tarjeta(0,1);						// $0, tarjeta comun
 		$tarjeta2 = new tarjeta(150,0);						// $150, tarjeta medio boleto
-		$this->$tarjeta4 = new tarjeta(0,0);						// $0, tarjeta medio boleto
-		$this->$tarjeta3 = new tarjeta(100,1);						// $100, tarjeta comun
-		$this->$colectivo144 = new colectivo("rosariobus",144,54321);			//colectivo 144
-		$this->$colectivo153 = new colectivo("semtur",153,12345);			//colectivo 154
-		$this->$horario = date("d.m.y H:i:s");						// hora actual
-		$this->$horariotransbordo = date("d.m.y H:i:s", strtotime('+1 hour'));		//hora actual + 1 hora
+		$tarjeta4 = new tarjeta(0,0);						// $0, tarjeta medio boleto
+		$tarjeta3 = new tarjeta(100,1);						// $100, tarjeta comun
+		$colectivo144 = new colectivo("rosariobus",144,54321);			//colectivo 144
+		$colectivo153 = new colectivo("semtur",153,12345);			//colectivo 154
+		$horario = date("d.m.y H:i:s");						// hora actual
+		$horariotransbordo = date("d.m.y H:i:s", strtotime('+1 hour'));		//hora actual + 1 hora
 	}
 
 	public function testPagarBoleto(){
