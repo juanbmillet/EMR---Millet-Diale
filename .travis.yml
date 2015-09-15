@@ -21,7 +21,4 @@ matrix:
     - php: hhvm
   fast_finish: true
 
-# Customize when the notification emails are sent.
-notifications:
-    on_success: never
-    on_failure: never
+script: phpunit tests/EMRTest.php
