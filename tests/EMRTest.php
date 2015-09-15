@@ -13,7 +13,7 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 	protected $horario;
 	protected $horariotransbordo;
 
-	protected function setUp(){
+	public function setUp(){
 		//$this->$tarjeta1 = new tarjeta(0,1);						// $0, tarjeta comun
 		$this->$tarjeta2 = new tarjeta(150,0);						// $150, tarjeta medio boleto
 		$this->$tarjeta4 = new tarjeta(0,0);						// $0, tarjeta medio boleto
