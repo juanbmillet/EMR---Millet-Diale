@@ -26,7 +26,7 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 
 	public function testPagarBoleto(){
 
-	$this->assertFalse($this->$tarjeta1->pagarboleto($horario, $horario, $colectivo144));		// saldo insuficiente comun
+	$this->assertFalse($this->tarjeta1->pagarboleto($horario, $horario, $colectivo144));		// saldo insuficiente comun
 
 	$this->assertEquals($this->$tarjeta3->pagarboleto($horario, $horario , $colectivo144), true);		// pasaje comun
 	$this->assertEquals($this->$tarjeta3->pagarboleto($horario, $horariotransbordo, $colectivo153), true);	// transbordo comun
@@ -47,7 +47,7 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 
 	public function testRecarga(){
 
-		$tarjeta1->recarga(-12);
+		tarjeta1->recarga(-12);
 		$this->assertEquals($this->$tarjeta1->saldo(), 0);				// Si recarga negativo no cambia el valor de saldo
 
 		$this->$tarjeta1->recarga(100);
