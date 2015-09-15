@@ -28,17 +28,17 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 
 	$this->assertFalse($this->tarjeta1->pagarboleto($this->horario, $this->horario, $this->colectivo144));		// saldo insuficiente comun
 
-	$this->assertEquals($this->tarjeta3->pagarboleto($horario, $horario , $colectivo144), true);		// pasaje comun
-	$this->assertEquals($this->tarjeta3->pagarboleto($horario, $horariotransbordo, $colectivo153), true);	// transbordo comun
+	$this->assertEquals($this->tarjeta3->pagarboleto($this->horario, $this->horario , $this->colectivo144), true);		// pasaje comun
+	$this->assertEquals($this->tarjeta3->pagarboleto($this->horario, $this->horariotransbordo, $this->colectivo153), true);	// transbordo comun
 	$this->assertEquals($this->tarjeta3->saldo(), 92.35);							// 100-5.75-1.90=92.35
 
 
-	$this->assertEquals($this->tarjeta4->pagarboleto($horario, $horario, $colectivo153), false);		// saldo insuficiente medio boleto
+	$this->assertEquals($this->tarjeta4->pagarboleto($this->horario, $this->horario, $this->colectivo153), false);		// saldo insuficiente medio boleto
 
-	$this->assertEquals($this->tarjeta2->pagarboleto(strtotime("03:00:00"), strtotime("01:00:00"), $colectivo144), true); 	//pasaje normal con tarjeta medio boleto
-	$this->assertEquals($this->tarjeta2->pagarboleto(strtotime("03:10:00"), strtotime("04:00:00"), $colectivo153), true);	//transbordo normal con tarjeta medio boleto
-	$this->assertEquals($this->tarjeta2->pagarboleto($horario, strtotime("04:10:00"), $colectivo144), true);			// pasaje medio boleto
-	$this->assertEquals($this->tarjeta2->pagarboleto($horario, $horariotransbordo, $colectivo153), true);			// transbordo medioboleto
+	$this->assertEquals($this->tarjeta2->pagarboleto(strtotime("03:00:00"), strtotime("01:00:00"), $this->colectivo144), true); 	//pasaje normal con tarjeta medio boleto
+	$this->assertEquals($this->tarjeta2->pagarboleto(strtotime("03:10:00"), strtotime("04:00:00"), $this->colectivo153), true);	//transbordo normal con tarjeta medio boleto
+	$this->assertEquals($this->tarjeta2->pagarboleto($this->horario, strtotime("04:10:00"), $this->colectivo144), true);			// pasaje medio boleto
+	$this->assertEquals($this->tarjeta2->pagarboleto($this->horario, $this->horariotransbordo, $this->colectivo153), true);			// transbordo medioboleto
 	$this->assertEquals($this->tarjeta2->saldo(), 138.49);									// 150 - 5,75 - 1,90 - 2,90 - 0,96 = 138.49
 	
 	
