@@ -1,12 +1,3 @@
-<html>
-<head>
-<title>TP Millet-Diale</title>
-<h1 align="center">EMR MILLET-DIALE (DAGOSTINO)</h1>
-<br>
-</head>
-
-<body>
-
 <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -192,6 +183,3 @@ class colectivo{
 
 
 ?>
-
-</body>
-</html>
