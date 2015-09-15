@@ -53,14 +53,14 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 		$this->tarjeta1->recarga(100);
 		$this->assertEquals($this->tarjeta1->saldo(), 100);			// 0+100=100
 
-		$this->$tarjeta2->recarga(200);
-		$this->assertEquals($this->$tarjeta2->saldo(), 384);			// 150+200+34=384
+		$this->tarjeta2->recarga(200);
+		$this->assertEquals($this->tarjeta2->saldo(), 384);			// 150+200+34=384
 
-		$this->$tarjeta3->recarga(400);
-		$this->assertEquals($this->$tarjeta3->saldo(), 592);			// 100+400+92=592
+		$this->tarjeta3->recarga(400);
+		$this->assertEquals($this->tarjeta3->saldo(), 592);			// 100+400+92=592
 
-		$this->$tarjeta3->recarga(0);
-		$this->assertEquals($this->$tarjeta3->saldo(), 593);			// 592+0=592
+		$this->tarjeta3->recarga(0);
+		$this->assertEquals($this->tarjeta3->saldo(), 593);			// 592+0=592
 
 	}
 }
