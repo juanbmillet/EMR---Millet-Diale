@@ -57,5 +57,6 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 	}
 }
 
+testRecarga();
 	
 ?>
