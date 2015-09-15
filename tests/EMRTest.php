@@ -4,7 +4,7 @@ require 'EMR.php';
 
 class TarjetaTest extends PHPUnit_Framework_TestCase{
 
-	protected $tarjeta1;
+	public $tarjeta1;
 	protected $tarjeta2;
 	protected $tarjeta3;
 	protected $tarjeta4;
