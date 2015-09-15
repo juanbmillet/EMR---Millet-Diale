@@ -47,11 +47,11 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 
 	public function testRecarga(){
 
-		tarjeta1->recarga(-12);
-		$this->assertEquals($this->$tarjeta1->saldo(), 0);				// Si recarga negativo no cambia el valor de saldo
+		$this->tarjeta1->recarga(-12);
+		$this->assertEquals($this->tarjeta1->saldo(), 0);				// Si recarga negativo no cambia el valor de saldo
 
-		$this->$tarjeta1->recarga(100);
-		$this->assertEquals($this->$tarjeta1->saldo(), 100);			// 0+100=100
+		$this->tarjeta1->recarga(100);
+		$this->assertEquals($this->tarjeta1->saldo(), 100);			// 0+100=100
 
 		$this->$tarjeta2->recarga(200);
 		$this->assertEquals($this->$tarjeta2->saldo(), 384);			// 150+200+34=384
