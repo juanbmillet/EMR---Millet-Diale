@@ -20,93 +20,114 @@ $horariotransbordo = date("d.m.y H:i:s", strtotime('+1 hour'));
 class tarjeta{
 	
 	var $saldo;
-	var $viajes;
+	var $viajes = [];
 	var $tipo;
+	var $ultlinea=0;
+	var $count=0;
 
-	function asignar($saldo,$tipo){
+	function __construct($saldo,$tipo){
 		$this->saldo = $saldo;
-		//$tusviajes = new viajes;
-	/*	$this->viajes->hora=[];
-		$this->viajes->colectivo=[];
-		$this->viajes->monto=[];*/
 		$this->tipo=$tipo;
 	}
-
+	/*
 	function agregarviaje($hora, $colectivo, $monto){
 		$this->viajes->hora[] = $hora;
 		$this->viajes->colectivo[] = $colectivo;
 		$this->viajes->monto[] = $monto;
 	}
-
-	function pagarboleto($horariotransbordo, $colectivo){
-		if($this->tipo == 1){ 										//tipo 1 = tarjeta comun
-			if(date("d.m.y H:i:s") < $horariotransbordo){			// date(..) = hora actual
+	*/
+	function pagarboleto($horario, $horariotransbordo, $colectivo){
+		if($this->tipo == 1){ 											//tipo 1 = tarjeta comun
+			if($horario < $horariotransbordo && $colectivo->linea!=$this->ultlinea && $this->count < 2){	// date(..) = hora actual
 				if($this->saldo >= 1.90){
 					$this->saldo = $this->saldo - 1.90;
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 1.90);
+					$this->viajes[]= new viajes($horario ,$colectivo->linea,1.90);
 					echo "Disfrute su viaje transbordo";
+					$this->ultlinea = $colectivo->linea;
+					$this->count++;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 			}
 			else{
 				if($this->saldo >= 5.75){
 					$this->saldo = $this->saldo - 5.75;
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 5.75);
+					$this->viajes[]= new viajes($horario,$colectivo->linea,5.75);
+					$this->ultlinea = $colectivo->linea;
 					echo "Disfrute su viaje";
+					$this->count = 0;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 
 			}
 		}
 		else{														//tipo 2 = medio boleto
-		if(date("H:i:s") > strtotime("00:00:00") and date("H:i:s") < strtotime("06:00:00")){  //chequea si esta en horario funcional
-			if(date("d.m.y H:i:s") < $horariotransbordo){
+		if($horario > strtotime("00:00:00") and $horario < strtotime("06:00:00")){  //chequea si esta en horario funcional
+			if($horario < $horariotransbordo && $colectivo->linea != $this->ultlinea && $this->count < 2){
 				if($this->saldo >= 1.90){
 					$this->saldo = $this->saldo - 1.90;
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 1.90);
+					$this->viajes[]= new viajes($horario ,$colectivo->linea,1.90);
 					echo "Disfrute su viaje transbordo";
+					$this->ultlinea = $colectivo->linea;
+					$this->count++;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 			}
 			else{
 				if($this->saldo >= 5.75){
 					$this->saldo = $this->saldo - 5.75;
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 5.75);
+					$this->viajes[]= new viajes($horario,$colectivo->linea,5.75);
+					$this->ultlinea = $colectivo->linea;
 					echo "Disfrute su viaje";
+					$this->count=0;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 
 			}
 
 		}
-		else{														// dentro de horario funcional
-			if(date("d.m.y H:i:s") < $horariotransbordo){
-				if($this->saldo >= 0.96){
+		else{										// dentro de horario funcional
+			if($horario < $horariotransbordo && $colectivo->linea != $this->ultlinea && $this->count < 2){
+				if($this->saldo >= 0.96 ){
 					$this->saldo = $this->saldo - 0.96;
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 0.96);
+					$this->viajes[]= new viajes($horario,$colectivo->linea,0.96);
 					echo "Disfrute su viaje transbordo";
+					$this->ultlinea = $colectivo->linea;
+					$this->count++;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 			}
 			else{
 				if($this->saldo >= 2.90){
 					$this->saldo = $this->saldo - 2.90;
-					//$this -> $tusviajes -> agregarviaje(date("d.m.y H:i:s"), $colectivo, 2.90);
-					$this->agregarviaje(date("d.m.y H:i:s"), $colectivo, 2.90);
+					$this->viajes[]= new viajes($horario,$colectivo->linea,2.90);
+					$this->ultlinea = $colectivo->linea;
 					echo "Disfrute su viaje";
+					$this->count=0;
+					return true;
 				}
 				else{
 					echo "Saldo insuficiente";
+					return false;
 				}
 
 			}
@@ -116,6 +137,9 @@ class tarjeta{
 }
 
 	function recarga($monto){
+		if($monto<0){
+			return;
+		}
 		if($monto < 196){
 			$this->saldo = $this->saldo + $monto;
 		}
@@ -124,21 +148,19 @@ class tarjeta{
 				$this->saldo = $this->saldo + $monto + 34;
 			}
 			else{
-				$this->saldo = $this->saldo + 92;
+				$this->saldo = $this->saldo + $monto + 92;
 			}
 		}
 	}
 
 	function saldo(){
+		//echo '$';
 		return $this->saldo;
 	}
 
-
-
 	function viajesrealizados(){
-		return $this->viajes;
+		print_r($this->viajes);
 	}
-
 
 }
 
@@ -148,6 +170,11 @@ class viajes{
 	var $colectivo;
 	var $monto;
 
+	function __construct($hora,$linea,$monto){
+		$this->hora=$hora;
+		$this->colectivo=$linea;
+		$this->monto=$monto;
+	}
 }
 
 class colectivo{
@@ -162,66 +189,7 @@ class colectivo{
 		$this->numero = $numero;
 	}
 }
-?>
 
-		<form method="post">
-		<div align="center">
-			<div>
-			<h1>Crear Tarjeta</h1>
-			</div>
-			<div>
-			<h2>Saldo</h2>
-			<input type="number" name="saldo"required>
-			</div>
-			<div>
-			<h2>Tipo de tarjeta</h2>
-			<select name="formTarjeta">
-  				<option value="">Selecciona...</option>
-  				<option value="1">Tarjeta Normal</option>
-  				<option value="2">Tarjeta Medio boleto</option>
-			</select>
-			</div>
-			<br>
-			<div align="center">
-			<input type="submit" name="enviar" value="Crear Tarjeta">
-			</div>
-		</div>
-	</form>
-	<br>
-	<br>
-	<form method="post">
-		<div align="center">
-			<div>
-			<h1>Cargar Tarjeta</h1>
-			</div>
-			<div>
-			<h2>Monto a cargar</h2>
-			<input type="number" name="monto"required>
-			</div>
-			<br>
-			<div align="center">
-			<input type="submit" name="enviar2" value="Cargar Tarjeta">
-			</div>
-		</div>
-	</form>
-
-
-<?php
-if(isset($_POST['enviar'])){
-	if(empty($_POST['formTarjeta'])){
-		?>
-		<h2 align="center">No seleccionaste el tipo de tarjeta!</h2>
-		<?php
-	}
-	else{
-		$tarjeta = new tarjeta;
-		$tarjeta->saldo = $_POST['saldo'];
-		$tarjeta->tipo = $_POST['formTarjeta'];
-	}
-}
-if(isset($_POST['enviar2'])){
-	$tarjeta->recarga($_POST['monto']);
-}	
 
 ?>
 
