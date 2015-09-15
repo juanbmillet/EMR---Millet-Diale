@@ -1,6 +1,6 @@
 <?php
 
-include 'EMR.php';
+require 'EMR.php';
 
 class TarjetaTest extends PHPUnit_Framework_TestCase{
 
