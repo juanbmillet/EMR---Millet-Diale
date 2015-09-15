@@ -52,11 +52,10 @@ class TarjetaTest extends PHPUnit_Framework_TestCase{
 		assert($tarjeta3->saldo()==592);			// 100+400+92=592
 
 		$tarjeta3->recarga(0);
-		assert($tarjeta3->saldo()==593);			// 592+0=592
+		assert($tarjeta3->saldo()==592);			// 592+0=592
 
 	}
 }
 
-testRecarga();
 	
 ?>
